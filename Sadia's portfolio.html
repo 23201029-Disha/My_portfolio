@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disha's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-1: #38bdf8;
+            --accent-2: #818cf8;
+            --accent-gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .bg-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .glow-1 {
+            top: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: rgba(56, 189, 248, 0.4);
+        }
+
+        .glow-2 {
+            bottom: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: rgba(129, 140, 248, 0.3);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-1);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 80px 20px 50px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: 800;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            padding-top: 60px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph 8s ease-in-out infinite;
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.4);
+            border: 4px solid var(--accent-1);
+            object-fit: cover;
+            aspect-ratio: 1;
+        }
+
+        .hero p.greeting {
+            color: var(--accent-1);
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p.desc {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 30px;
+            background: var(--accent-gradient);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .about-highlight {
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 1.3rem;
+            border-left: 4px solid var(--accent-1);
+            padding-left: 15px;
+            margin: 25px 0;
+            line-height: 1.4;
+        }
+
+        .morph-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .morph-shape {
+            width: 280px;
+            height: 280px;
+            background: var(--accent-gradient);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: morph 8s ease-in-out infinite;
+            box-shadow: 0 0 40px rgba(129, 140, 248, 0.3);
+            position: relative;
+        }
+
+        .morph-shape::before {
+            content: '</>';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            opacity: 0.8;
+        }
+
+        @keyframes morph {
+            0% {
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            }
+
+            50% {
+                border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+            }
+
+            100% {
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            }
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--card-border);
+            top: 20px;
+            bottom: 20px;
+            left: 20px;
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 11px;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--bg-color);
+            border: 4px solid var(--accent-1);
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+        }
+
+        .timeline-content {
+            padding: 30px !important;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .timeline-content h4 {
+            font-size: 1rem;
+            color: var(--accent-2);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .achievement-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        /* ===== PROJECTS SECTION ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 35px 30px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-gradient);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.1);
+        }
+
+        .project-icon {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            line-height: 1.65;
+            flex: 1;
+            margin-bottom: 25px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .tech-badge {
+            background: rgba(129, 140, 248, 0.1);
+            color: var(--accent-2);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            transition: all 0.3s;
+        }
+
+        .tech-badge:hover {
+            background: rgba(129, 140, 248, 0.22);
+            transform: translateY(-2px);
+        }
+
+        .contact-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-1);
+            box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 160px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--card-border);
+            margin-top: 50px;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 18px;
+            margin-top: 28px;
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(56, 189, 248, 0.07);
+            border-radius: 14px;
+            padding: 18px 8px 10px 8px;
+            box-shadow: 0 2px 8px rgba(56, 189, 248, 0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 8px 24px rgba(56, 189, 248, 0.18);
+        }
+
+        .skill-icon {
+            width: 38px;
+            height: 38px;
+            margin-bottom: 8px;
+        }
+
+        .skill-item span {
+            color: var(--text-main);
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        /* Hamburger Button */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px;
+            border: none;
+            background: transparent;
+            z-index: 1100;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: var(--text-main);
+            border-radius: 3px;
+            transition: transform 0.35s ease, opacity 0.3s ease, background 0.3s ease;
+            transform-origin: center;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7.5px) rotate(45deg);
+            background: var(--accent-1);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7.5px) rotate(-45deg);
+            background: var(--accent-1);
+        }
+
+        /* Mobile Dropdown Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 65px;
+            left: 0;
+            right: 0;
+            background: rgba(11, 15, 25, 0.97);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--card-border);
+            z-index: 999;
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+
+        .mobile-menu.open {
+            max-height: 400px;
+            padding: 15px 0 20px;
+        }
+
+        .mobile-menu a {
+            display: block;
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 14px 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-left: 3px solid transparent;
+            transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease, padding-left 0.25s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--accent-1);
+            border-left-color: var(--accent-1);
+            background: rgba(56, 189, 248, 0.06);
+            padding-left: 38px;
+        }
+
+
+        @media (max-width: 1024px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                margin-top: 40px;
+            }
+
+            .hero-content {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .morph-container {
+                display: none;
+            }
+
+            nav {
+                padding: 16px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .timeline::before {
+                left: 15px;
+            }
+
+            .timeline-dot {
+                left: 6px;
+            }
+
+            .timeline-item {
+                padding-left: 45px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <nav>
+        <div class="logo">Sadia Jahan</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills &amp; Awards</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills &amp; Awards</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <p class="greeting">HELLO, I'M</p>
+                <h1>Sadia Jahan Disha<br><span>Computer Science Student</span></h1>
+                <p class="desc">Passionate about coding, algorithms, and weaving logic into beautiful digital
+                    experiences. Always exploring the wonderful world of tech.</p>
+                <a href="#contact" class="btn">Let's Connect</a>
+            </div>
+            <div class="hero-image">
+                <img src="profile.jpeg" alt="Sadia Profile">
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" style="padding-top: 100px;">
+            <h2 class="section-title">About Me</h2>
+            <div class="glass-card about-grid">
+                <div class="about-text">
+                    <div class="about-highlight">
+                        I am currently a 3rd Year Computer Science and Engineering (CSE) student.
+                    </div>
+                    <p>My journey in the tech world began with a genuine curiosity about how complex software ecosystems
+                        operate. Today, I'm fully dedicated to mastering the craft of programming, unraveling complex
+                        algorithms, and building effective online experiences.</p>
+                    <p>I thrive on continuous learning—constantly pushing my boundaries by diving into new programming
+                        languages, frameworks, and modern technologies. I love transforming complex problems into
+                        elegant, simple solutions.</p>
+                </div>
+                <div class="morph-container">
+                    <div class="morph-shape"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" style="padding-top: 120px;">
+            <h2 class="section-title">Academic Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card timeline-content">
+                        <h3>B.Sc in Computer Science &amp; Engineering (CSE)</h3>
+                        <h4>University Of Asia Pacific | January 2024 - Present</h4>
+                        <p style="color: var(--text-muted);">Immersed in advanced software engineering, software design
+                            patterns, and systemic performance. Building out my fundamental understanding of what makes
+                            modern tech tick.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card timeline-content">
+                        <h3>Higher Secondary Certificate (HSC)</h3>
+                        <h4>Shahid Syed Nazrul Islam College | Science Division</h4>
+                        <p style="color: var(--text-muted);">GPA: 5.00 | Passing Year: 2022</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="glass-card timeline-content">
+                        <h3>Secondary School Certificate (SSC)</h3>
+                        <h4>Children Home Public School | Science Division</h4>
+                        <p style="color: var(--text-muted);">GPA: 5.00 | Passing Year: 2020</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" style="padding-top: 120px;">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-icon">🌐</div>
+                    <h3>Personal Portfolio Website</h3>
+                    <p>A modern, responsive personal portfolio website designed and developed to showcase my skills,
+                        academic background, projects, and achievements. The website focuses on clean UI, smooth layout,
+                        and responsive design.</p>
+                    <div class="project-tech">
+                        <span class="tech-badge">HTML</span>
+                        <span class="tech-badge">CSS</span>
+                        <span class="tech-badge">JavaScript</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-icon">🍽️</div>
+                    <h3>Online Food Ordering Management System</h3>
+                    <p>A database-driven project designed to manage food items, customers, orders, and payments
+                        efficiently. The system ensures proper data organization using relational database concepts.</p>
+                    <div class="project-tech">
+                        <span class="tech-badge">DBMS</span>
+                        <span class="tech-badge">SQL</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-icon">👨‍💼</div>
+                    <h3>Employee Record System</h3>
+                    <p>A Java-based console application designed to manage employee information such as ID, name,
+                        designation, and salary. The system allows adding, updating, viewing, and deleting employee
+                        records using core Java concepts.</p>
+                    <div class="project-tech">
+                        <span class="tech-badge">Java</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" style="padding-top: 120px;">
+            <h2 class="section-title">Skills &amp; Achievements</h2>
+            <div class="skills-container">
+                <div class="glass-card">
+                    <div class="achievement-icon" style="color: var(--accent-1); font-size: 3rem;">💻</div>
+                    <h3 style="margin-bottom: 18px;">Technical Skills</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 18px; font-size: 1.08rem;">
+                        I am a third year Computer Science student.<br>
+                        I know <span style="color:var(--accent-1);font-weight:600;">HTML</span>, <span
+                            style="color:var(--accent-1);font-weight:600;">CSS</span>, <span
+                            style="color:var(--accent-1);font-weight:600;">Java</span>, <span
+                            style="color:var(--accent-1);font-weight:600;">C Programming</span>, <span
+                            style="color:var(--accent-1);font-weight:600;">Algorithms</span>,
+                        <span style="color:var(--accent-1);font-weight:600;">Problem Solving</span>, <span
+                            style="color:var(--accent-1);font-weight:600;">Git &amp; GitHub</span>, <span
+                            style="color:var(--accent-1);font-weight:600;">Microsoft Word</span>, <span
+                            style="color:var(--accent-1);font-weight:600;">Microsoft Excel</span>, and <span
+                            style="color:var(--accent-1);font-weight:600;">PowerPoint</span>.
+                    </p>
+                    <div class="skill-grid">
+                        <div class="skill-item" title="HTML5"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                                alt="HTML5" class="skill-icon"><span>HTML5</span></div>
+                        <div class="skill-item" title="CSS3"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
+                                alt="CSS3" class="skill-icon"><span>CSS3</span></div>
+                        <div class="skill-item" title="Java"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                                alt="Java" class="skill-icon"><span>Java</span></div>
+                        <div class="skill-item" title="C Programming"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C"
+                                class="skill-icon"><span>C Programming</span></div>
+                        <div class="skill-item" title="Algorithms"><span class="skill-icon"
+                                style="font-size:2rem;">🔢</span><span>Algorithms</span></div>
+                        <div class="skill-item" title="Problem Solving"><span class="skill-icon"
+                                style="font-size:2rem;">🧩</span><span>Problem Solving</span></div>
+                        <div class="skill-item" title="Git &amp; GitHub"><img
+                                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                                alt="GitHub" class="skill-icon"><span>Git &amp; GitHub</span></div>
+                        <div class="skill-item" title="Microsoft Word">
+                            <span class="skill-icon">
+                                <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="38" height="38" rx="8" fill="#2B579A" />
+                                    <text x="19" y="26" text-anchor="middle" font-size="18" fill="white"
+                                        font-family="Arial" font-weight="bold">W</text>
+                                </svg>
+                            </span>
+                            <span>Microsoft Word</span>
+                        </div>
+                        <div class="skill-item" title="Microsoft Excel">
+                            <span class="skill-icon">
+                                <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="38" height="38" rx="8" fill="#217346" />
+                                    <text x="19" y="26" text-anchor="middle" font-size="18" fill="white"
+                                        font-family="Arial" font-weight="bold">E</text>
+                                </svg>
+                            </span>
+                            <span>Microsoft Excel</span>
+                        </div>
+                        <div class="skill-item" title="PowerPoint">
+                            <span class="skill-icon">
+                                <svg width="38" height="38" viewBox="0 0 38 38" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="38" height="38" rx="8" fill="#D24726" />
+                                    <text x="19" y="26" text-anchor="middle" font-size="18" fill="white"
+                                        font-family="Arial" font-weight="bold">P</text>
+                                </svg>
+                            </span>
+                            <span>PowerPoint</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <div class="achievement-icon" style="color: #fbbf24;">🏆</div>
+                    <h3>Key Achievements</h3>
+                    <div style="margin-top: 20px;">
+                        <div style="display: flex; flex-direction: column; gap: 15px;">
+                            <div>
+                                <h4 style="color: var(--text-main); font-size: 1.2rem; margin-bottom: 5px;">Dean's Award
+                                </h4>
+                                <p
+                                    style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px;">
+                                    Truly honored and grateful to receive the Dean's Award.</p>
+                            </div>
+                            <div
+                                style="width: 100%; border-radius: 12px; overflow: hidden; border: 2px solid rgba(251, 191, 36, 0.3);">
+                                <img src="dean-award.jpeg" alt="Dean's Award"
+                                    style="width: 100%; display: block; object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" style="padding-top: 120px; padding-bottom: 60px;">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-wrapper glass-card">
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 35px; font-size: 1.1rem;">Whether
+                    you have a question or just want to say hi, my inbox is always open!</p>
+                <form
+                    onsubmit="event.preventDefault(); alert('Awesome! Thank you for reaching out. Your message has been sent successfully.');">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" placeholder="What's on your mind?"
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn"
+                        style="width: 100%; border-radius: 12px; font-size: 1.1rem; padding: 18px;">Send
+                        Message</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Sadia Jahan Disha. Built with modern HTML &amp; CSS.</p>
+    </footer>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', function (e) {
+            e.stopPropagation();
+            hamburger.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                hamburger.classList.remove('open');
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+                hamburger.classList.remove('open');
+                mobileMenu.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+
+</html>
